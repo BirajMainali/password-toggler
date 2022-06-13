@@ -15,7 +15,7 @@ passwordInputs.forEach(input => {
     button.style.top = '0';
     button.style.background = 'none';
     button.style.outline = 'none';
-    button.style.fontSize = '1.5em';
+    button.style.fontSize = '1.3em';
     button.style.border = 'none';
     input.parentNode.insertBefore(button, input.nextSibling);
 
