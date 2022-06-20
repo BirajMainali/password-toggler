@@ -27,17 +27,9 @@ passwordInputs.forEach(input => {
         }, 700);
     });
 
-    button.addEventListener('mouseover', () => {
-        button.textContent = '🙊';
-    })
-    button.addEventListener('mouseout', () => {
-        button.textContent = '🙈';
-    })
-
     button.addEventListener('click', (ev) => {
         ev.preventDefault();
-        if (input.type === 'password' && input.value.length > 0) input.type = 'text';
-        else input.type = 'password';
+        input.type == 'text' ? input.type = 'password' : input.type = 'text';
     });
 
     const observer = new MutationObserver(function (mutations) {
