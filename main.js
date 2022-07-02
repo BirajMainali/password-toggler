@@ -18,13 +18,14 @@ passwordInputs.forEach(input => {
     button.style.border = 'none';
     input.parentNode.insertBefore(button, input.nextSibling);
 
-    input.addEventListener('input', () => {
-        if (input.value.length > 0) {
+
+    input.addEventListener('input', (ev) => {
+        if (ev.target.value) {
             button.textContent = '🙊';
         }
         setTimeout(() => {
-            button.textContent = '🙈';
-        }, 700);
+            input.type = input.type;
+        }, 1000)
     });
 
     button.addEventListener('click', (ev) => {
@@ -34,9 +35,9 @@ passwordInputs.forEach(input => {
 
     const observer = new MutationObserver(function (mutations) {
         mutations.forEach(x => {
+            const target = x.target;
             if (x.type != "attributes" && x.attributeName != "type") return;
-            const type = x.target.type;
-            type == "password" ? button.textContent = '🙈' : button.textContent = '🙉';
+            target.type == "password" ? button.textContent = '🙈' : button.textContent = '🙉';
         })
     });
 
