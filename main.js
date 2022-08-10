@@ -7,6 +7,7 @@ passwordInputs.forEach(input => {
     input.parentNode.insertBefore(wrapper, input);
     wrapper.appendChild(input);
     const button = document.createElement('button');
+    button.setAttribute('tabindex', '-1');
     button.style.height = `${input.offsetHeight}px`;
     button.style.position = 'absolute';
     button.style.right = '0';
