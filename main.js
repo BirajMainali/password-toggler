@@ -2,25 +2,19 @@ const __a = document.querySelectorAll.bind(document);
 
 const passwordInputs = __a('input[type="password"]');
 passwordInputs.forEach(input => {
-    // const wrapper = document.createElement('div');
-    // wrapper.style.position = 'relative';
-    // input.parentNode.insertBefore(wrapper, input);
-    // wrapper.appendChild(input);
-
     const button = document.createElement('button');
     button.setAttribute('tabindex', '-1');
-    button.style.height = `${input.offsetHeight}px`;
+    button.type = "button";
+    button.style.height = `${input.clientHeight}px`;
     button.style.position = 'absolute';
-    button.style.right = '10px';
-    button.style.top = input.offsetTop + "px";
-    button.textContent = '';
+    button.style.left = (input.offsetLeft + input.clientWidth - 38) + "px";
+    button.style.top = (input.offsetTop) + "px";
     button.style.background = 'none';
     button.style.outline = 'none';
-    button.style.fontSize = '1.3em';
+    button.style.fontSize = '1.2em';
     button.style.border = 'none';
     input.insertAdjacentElement("afterend", button);
     input.parentNode.insertBefore(button, input.nextSibling);
-
 
     input.addEventListener('input', (ev) => {
         if (ev.target.value) {
