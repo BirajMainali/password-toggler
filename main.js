@@ -13,11 +13,16 @@ passwordInputs.forEach(input => {
     button.style.outline = 'none';
     button.style.fontSize = '1.2em';
     button.style.border = 'none';
+    input.addEventListener('keydown', e => {
+        if(e.ctrlKey && e.key === "b") {
+            toggle();
+        }
+    });
     input.insertAdjacentElement("afterend", button);
     input.parentNode.insertBefore(button, input.nextSibling);
 
     input.addEventListener('input', (ev) => {
-        if (ev.target.value) {
+        if (input.value) {
             button.textContent = '🙊';
         }
         setTimeout(() => {
@@ -25,9 +30,13 @@ passwordInputs.forEach(input => {
         }, 1000)
     });
 
+    function toggle() {
+        input.type == 'text' ? input.type = 'password' : input.type = 'text';
+    }
+
     button.addEventListener('click', (ev) => {
         ev.preventDefault();
-        input.type == 'text' ? input.type = 'password' : input.type = 'text';
+        toggle();
     });
 
     const observer = new MutationObserver(function (mutations) {
