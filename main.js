@@ -13,6 +13,7 @@ passwordInputs.forEach(input => {
     button.style.outline = 'none';
     button.style.fontSize = '1.2em';
     button.style.border = 'none';
+    input.title = "Press CTRL+B to toggle password mode";
     input.addEventListener('keydown', e => {
         if(e.ctrlKey && e.key === "b") {
             toggle();
