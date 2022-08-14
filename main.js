@@ -16,6 +16,7 @@ passwordInputs.forEach(input => {
     input.title = "Press CTRL+B to toggle password mode";
     input.addEventListener('keydown', e => {
         if(e.ctrlKey && e.key === "b") {
+            e.preventDefault();
             toggle();
         }
     });
