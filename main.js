@@ -2,26 +2,29 @@ const __a = document.querySelectorAll.bind(document);
 
 const passwordInputs = __a('input[type="password"]');
 passwordInputs.forEach(input => {
-    const wrapper = document.createElement('div');
-    wrapper.style.position = 'relative';
-    input.parentNode.insertBefore(wrapper, input);
-    wrapper.appendChild(input);
     const button = document.createElement('button');
     button.setAttribute('tabindex', '-1');
-    button.style.height = `${input.offsetHeight}px`;
+    button.type = "button";
+    button.style.height = `${input.clientHeight}px`;
     button.style.position = 'absolute';
-    button.style.right = '0';
-    button.style.top = '0';
-    button.textContent = '';
+    button.style.left = (input.offsetLeft + input.clientWidth - 38) + "px";
+    button.style.top = (input.offsetTop) + "px";
     button.style.background = 'none';
     button.style.outline = 'none';
-    button.style.fontSize = '1.3em';
+    button.style.fontSize = '1.2em';
     button.style.border = 'none';
+    input.title = "Press CTRL+B to toggle password mode";
+    input.addEventListener('keydown', e => {
+        if(e.ctrlKey && e.key === "b") {
+            e.preventDefault();
+            toggle();
+        }
+    });
+    input.insertAdjacentElement("afterend", button);
     input.parentNode.insertBefore(button, input.nextSibling);
 
-
     input.addEventListener('input', (ev) => {
-        if (ev.target.value) {
+        if (input.value) {
             button.textContent = '🙊';
         }
         setTimeout(() => {
@@ -29,9 +32,13 @@ passwordInputs.forEach(input => {
         }, 1000)
     });
 
+    function toggle() {
+        input.type == 'text' ? input.type = 'password' : input.type = 'text';
+    }
+
     button.addEventListener('click', (ev) => {
         ev.preventDefault();
-        input.type == 'text' ? input.type = 'password' : input.type = 'text';
+        toggle();
     });
 
     const observer = new MutationObserver(function (mutations) {
